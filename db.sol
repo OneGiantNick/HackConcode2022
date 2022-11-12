@@ -47,9 +47,9 @@ contract Users {
     struct UserData {
         string username;
         bytes32 password;
-        string sex = '';
-        int256 height = 0;
-        int256 weight = 0;
+        string sex;
+        int256 height;
+        int256 weight;
 
         string role = 'user';
     }
@@ -72,7 +72,13 @@ contract Users {
         );
         bytes32 hashed_password;
         hashed_password = keccak256(abi.encodePacked(_password));
-        UserData memory newUser = UserData(_username, hashed_password);
+        UserData memory newUser = UserData(
+            _username,
+            hashed_password,
+            sex='',
+            height=0;
+            weight=0;
+            );
         users[_username] = newUser;
         users_lookup.push(_username);
     }
