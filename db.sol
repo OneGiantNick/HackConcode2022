@@ -42,7 +42,6 @@ contract Appointment {
 
 contract Users {
     event loginEvent(address value);
-    event logoutEvent(string value);
 
     struct UserData {
         string username;
@@ -109,13 +108,10 @@ contract Users {
         emit loginEvent(address(session));
     }
 
-    /*    function logout(string memory _username, address session)
-        public
-        returns (bool)
-    {
-        sessions[_username].logoutSession(block.timestamp);
+    function logout(address session) public {
+        Session(session).logoutSession(block.timestamp);
     }
-*/
+
     function giveRole(string memory _username, string memory _role) public {
         for (uint256 i = 0; i < users_lookup.length; i++) {
             if (compareStrings(users_lookup[i], _username)) {
