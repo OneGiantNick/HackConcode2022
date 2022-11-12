@@ -1,21 +1,30 @@
+*{
+  margin-top: 0;
+  margin-left: 0;
+}
+
 body {
   overflow: hidden;
   font-family: "Helvetica", Times, serif;
 }
 svg {
-  height: 100%;  
-  width: 100%;
+  height: 100vh;  
+  width: 100vw;
   background: #FFD1DC;
 }
 path {
   fill: none;
   stroke: #FF6961;
   stroke-width: 0.5px;
-
 }
+
+
 
 #box {
   color:#FF6961;
+}
+#box1{
+  color:#1F75FE;
 }
 #overlay {
   position: fixed;
@@ -106,13 +115,42 @@ path {
   color: #FF6961;
 }
 
-.login-box .signupbtn {
+.signupbtn {
+  font-size: 0.4em;
   float: right;
   margin-top: 15px;
   color: #fff;
 }
 
-.login-box .signupbtn:hover {
-  color: #03e9f4;
+.signupbtn:hover {
+  color: #FF6961;
 }
 
+.btn-primary1{
+  text-transform: uppercase;
+  border: 3px outset #1F75FE;
+  background-color: #74BBFB;
+  color: #1F75FE;
+  display: block;
+  margin: auto;
+  font-size: 0.5em;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-primary1:hover{
+  border: 3px outset #74BBFB;
+  background-color: #1F75FE;
+  color: #74BBFB;
+}
+
+.signinbtn {
+  font-size: 0.4em;
+  float: right;
+  margin-top: 15px;
+  color: #fff;
+}
+
+.signinbtn:hover {
+  color: #1F75FE;
+}

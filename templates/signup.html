@@ -5,29 +5,47 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
-
-
-
   </head>
+  <style>
+    svg{
+        height: 100vh;  
+        width: 100vw;
+        background: #74BBFB;
+    }
+
+    path {
+        fill: none;
+        stroke: #1F75FE;
+        stroke-width: 0.5px;
+    }
+  </style>
     <div id="overlay">
         <div id="text">
             <div class="login-box">
-                <h2>Sign<span id="box">UP</span></h2>
+                <h2>Sign<span id="box1">UP</span></h2>
                 <form method="POST" action="">
-                  <div class="user-box">
-                    <label for="exampleInputEmail1"></label>
-                    <input name="exampleInputUsername1" type="username" class="form-control" id="exampleInputUsername1"
-                      placeholder="Username" required="">
-                  </div>
-                  <div class="user-box">
-                    <label for="exampleInputPassword1"></label>
-                    <input name="exampleInputPassword1" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
-                    {% if incorrectDetails %}
-                    <small id="incorrectDetails" class="'form-text text-muted">Invalid username or password</small>
-                    {% endif %}
-                  </div>
-                  <button type="submit" onclick="showOverlay()" class="btn btn-primary">Login</button>
-                  <a class="signupbtn" href="{{ url_for('login')}}" role="button">Login</a>
+                    <div class="user-box">
+                        <label for="exampleInputEmail1"></label>
+                        <input name="signUpUsername1" type="username" class="form-control" id="signUpUsername1"
+                            placeholder="Username" required="">
+                        {% if usernameExists %}
+                        <small id="usernameExists" class="'form-text text-muted">Username already taken</small>
+                        {% endif %}
+                    </div>
+                    <div class="user-box">
+                        <label for="exampleInputPassword1"></label>
+                        <input name="signUpPassword1" type="password" class="form-control" id="signUpPassword1" placeholder="Password" required="">
+                    </div>
+                    <div class="user-box">
+                        <label for="exampleInputPassword1"></label>
+                        <input name="signUpPassword2" type="password" class="form-control" id="signUpPassword2"
+                            placeholder="Confirm Password" required="">
+                        {% if noPasswordMatch %}
+                        <small id="noPasswordMatch" class="'form-text text-muted">Passwords do not match</small>
+                        {% endif %}
+                    </div>
+                  <button type="submit" onclick="showOverlay()" class="btn btn-primary1">Create</button>
+                  <a class="signinbtn" href="{{ url_for('login')}}" role="button">Sign in</a>
                 </form>
               </div>
         </div>
