@@ -90,3 +90,21 @@ def login(username, password):
         return session
     except:
         return "error"
+
+
+def logout(session):
+    print(f"Attempting to log out from {session}")
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.logout(session).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        return session
+    except:
+        return "error"
