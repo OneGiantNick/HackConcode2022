@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
 {% block content %}
 <!--Put code here-->
-<form>
+<form method="POST">
     <div class="entireForm">
       <div>
          <label for="username">
@@ -56,14 +58,46 @@
        <div>
           <label>What are you seeking an appointment for?</label>
           <div class="medicalConditions">
-             <label for="stomachache">Stomachache</label>
-             <input type="radio" name="ilness" id="stomachache">
+             <label for="chestPains">Chest pains</label>
+             <input type="radio" name="illness" id="chestPains">
           </div>
           <div class="medicalConditions">
-             <label for="covid">Covid</label>
-             <input type="radio" name="ilness" id="covid">
+             <label for="abdominalPains">Abdominal Pains</label>
+             <input type="radio" name="illness" id="abdominalPains">
           </div>
           <div class="medicalConditions">
+            <label for="toothaches">Toothaches</label>
+            <input type="radio" name="illness" id="toothaches">
+         </div>
+         <div class="medicalConditions">
+            <label for="brokenBonesAndSprains">Broken Bones And Sprains</label>
+            <input type="radio" name="illness" id="brokenBonesAndSprains">
+         </div>
+         <div class="medicalConditions">
+            <label for="upperRespiratoryInfections">Upper Respiratory Infections</label>
+            <input type="radio" name="illness" id="upperRespiratoryInfections">
+         </div>
+         <div class="medicalConditions">
+            <label for="contusionsAndCuts">Contusions And Cuts</label>
+            <input type="radio" name="illness" id="contusionsAndCuts">
+         </div>
+         <div class="medicalConditions">
+            <label for="backPain">Back Pain</label>
+            <input type="radio" name="illness" id="backPain">
+         </div>
+         <div class="medicalConditions">
+            <label for="skinInfections">Skin Infections</label>
+            <input type="radio" name="illness" id="skinInfections">
+         </div>
+         <div class="medicalConditions">
+            <label for="foreignObjectsIntheBody">Foreign Objects In the Body</label>
+            <input type="radio" name="illness" id="foreignObjectsIntheBody">
+         </div>
+         <div class="medicalConditions">
+            <label for="headaches">Headaches</label>
+            <input type="radio" name="illness" id="headaches">
+         </div>
+          <div>
              <label for="others">
                 Others
              </label>
