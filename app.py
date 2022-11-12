@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, make_response
 import functions
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
@@ -15,9 +15,17 @@ def login():
         if result == "error":
             return render_template("login.html", incorrectDetails=True)
 
-        return redirect(url_for("dashboard", session=result))
+        resp = make_response(redirect(url_for("dashboard")))
+        resp.set_cookie("session_address", result)
+        return resp
 
     return render_template("login.html")
+
+
+def logout():
+    session = request.cookies.get("session_address")
+    functions.logout(session)
+    return redirect(url_for("login"))
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -39,7 +47,7 @@ def signup():
 
 @app.route("/dashboard")
 def dashboard():
-    print(request.args.get("session"))
+    session = request.args.get("session")
     return render_template("dashboard.html")
 
 
