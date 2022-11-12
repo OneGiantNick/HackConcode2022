@@ -1,20 +1,121 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
 
-{% block content %}
-    <h1>{% block title %} LOGIN {% endblock %}</h1>
 
-    <div class = "background"></div>
-    
+
+  </head>
+    <div id="overlay">
+        <div id="text">
+            <h1>Login</h1>
+        </div>
+    </div>
+
+    <svg class="animated-lines" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120"></svg>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        var bg = new Trianglify({
-        noiseIntensity: 0,
-        cellsize: 50,
-        cellpadding: 10,
-        fillOpacity: 1,
-        strokeOpacity: 0
-        });
+        var svgEl = document.querySelector('.animated-lines');
 
-        var pattern = bg.generate(document.body.clientWidth, document.body.clientHeight);
-        document.body.setAttribute('style', 'background-image: '+pattern.dataUrl);
-    </script>
-{% endblock %}
+            var randomRange = function(min, max) {
+            return ~~(Math.random() * (max - min + 1)) + min
+        };
+
+        var numberOfLines = 20,
+        lineDataArr = [];
+
+        var createPathString = function() {
+
+        var completedPath = '',
+            comma = ',',
+            ampl = 50; // pixel range from 0, aka how deeply they bend
+
+        for (var i = 0; i < numberOfLines; i++) {
+
+            var path = lineDataArr[i];
+
+            var current = {
+            x: ampl * Math.sin(path.counter / path.sin),
+            y: ampl * Math.cos(path.counter / path.cos)
+            };
+
+            var newPathSection = 'M' +
+            // starting point
+            path.startX +
+            comma +
+            path.startY +
+            // quadratic control point
+            ' Q' +
+            path.pointX +
+            comma +
+            (current.y * 1.5).toFixed(3) + // 1.5 to amp up the bend a little
+            // center point intersection
+            ' ' +
+            ((current.x) / 10 + path.centerX).toFixed(3) +
+            comma +
+            ((current.y) / 5 + path.centerY).toFixed(3) +
+            // end point with quadratic reflection (T) (so the bottom right mirrors the top left)
+            ' T' +
+            path.endX +
+            comma +
+            path.endY;
+            path.counter++;
+
+            completedPath += newPathSection;
+
+        };
+
+        return completedPath;
+
+        };
+
+        var createLines = function() {
+
+        var newPathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path'),
+            // higher is slower
+            minSpeed = 200,
+            maxSpeed = 300;
+
+        // create an arr which contains objects for all lines
+        // createPathString() will use this array
+        for (var i = 0; i < numberOfLines; i++) {
+
+            var lineDataObj = {
+            counter: randomRange(1, 500), // a broad counter range ensures lines start at different cycles (will look more random)
+            startX: randomRange(-5, -40),
+            startY: randomRange(-5, -30),
+            endX: randomRange(200, 220), // viewbox = 200
+            endY: randomRange(120, 140), // viewbox = 120
+            sin: randomRange(minSpeed, maxSpeed),
+            cos: randomRange(minSpeed, maxSpeed),
+            pointX: randomRange(30, 55),
+            centerX: randomRange(90, 120),
+            centerY: randomRange(60, 70)
+            }
+
+            lineDataArr.push(lineDataObj)
+
+        }
+
+        var animLoop = function() {
+            newPathEl.setAttribute('d', createPathString());
+            requestAnimationFrame(animLoop);
+        }
+
+        // once the path elements are created, start the animation loop
+        svgEl.appendChild(newPathEl);
+        animLoop();
+
+        };
+
+        createLines();
+    </script>  
+  </body>
+</html>
