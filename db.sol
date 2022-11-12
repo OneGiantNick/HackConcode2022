@@ -75,9 +75,9 @@ contract Users {
             _username,
             hashed_password,
             sex='',
-            height=0;
-            weight=0;
-            role='user';
+            height=0,
+            weight=0,
+            role='user',
             );
         users[_username] = newUser;
         users_lookup.push(_username);
