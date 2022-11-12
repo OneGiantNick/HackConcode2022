@@ -48,6 +48,11 @@ def signup():
     return render_template("signup.html")
 
 
+@app.route("/welcome")
+def welcome():
+    pass
+
+
 @app.route("/dashboard")
 def dashboard():
     session = request.cookies.get("session_address")
@@ -64,6 +69,7 @@ def appointments():
         return redirect(url_for("login"))
 
     return render_template("appointment.html")
+
 
 @app.route("/health")
 def health():
