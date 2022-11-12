@@ -1,15 +1,43 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, redirect, request, url_for
+import functions
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(__name__, template_folder="templates", static_folder="static")
 app.debug = True
 
-@app.route("/")
-def login():
-    return render_template("login.html")
 
+@app.route("/", methods=["GET", "POST"])
+def login():
+    context = {"title": "HealthUp"}
+    if request.method == "POST":
+        result = functions.login(
+            request.form.get("exampleInputUsername1"),
+            request.form.get("exampleInputPassword1"),
+        )
+        if result == False:
+            context["incorrectDetails"] = True
+            return redirect(url_for(login, context=context))
+
+        return redirect(url_for(dashboard(result)))
+
+    return render_template("login.html", context=context)
+
+
+<<<<<<< Updated upstream
 @app.route("/signup")
+=======
+@app.route("/signup", methods=["GET", "POST"])
+>>>>>>> Stashed changes
 def signup():
+    context = {"title": "Sign up"}
+    if request.method == "POST":
+        result = functions.createUser(request.form.get(""))
     return render_template("signup.html")
+
 
 if __name__ == "__main__":
     app.run()
+
+
+@app.route("/dashboard")
+def dashboard(session):
+    return render_template("dashboard.html")
