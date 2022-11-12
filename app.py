@@ -22,10 +22,13 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout")
 def logout():
     session = request.cookies.get("session_address")
     functions.logout(session)
-    return redirect(url_for("login"))
+    resp = make_response(redirect(url_for("login")))
+    resp.set_cookie("session_address", "", expires=0)
+    return resp
 
 
 @app.route("/signup", methods=["GET", "POST"])
