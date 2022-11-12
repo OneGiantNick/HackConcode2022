@@ -117,7 +117,7 @@ contract Users {
     }
 */
     function giveRole(string memory _username, string memory _role) public {
-        for (uint256 i = 0; i < users_lookup; i++) {
+        for (uint256 i = 0; i < users_lookup.length; i++) {
             if (compareStrings(users_lookup[i], _username)) {
                 users[users_lookup[i]].role = _role;
             }
