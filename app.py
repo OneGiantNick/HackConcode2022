@@ -7,19 +7,17 @@ app.debug = True
 
 @app.route("/", methods=["GET", "POST"])
 def login():
-    context = {"title": "HealthUp"}
     if request.method == "POST":
         result = functions.login(
             request.form.get("exampleInputUsername1"),
             request.form.get("exampleInputPassword1"),
         )
-        if result == False:
-            context["incorrectDetails"] = True
-            return redirect(url_for(login, context=context))
+        if result == "error":
+            return render_template("login.html", incorrectDetails=True)
 
-        return redirect(url_for(dashboard(result)))
+        return redirect(url_for("dashboard", session=result))
 
-    return render_template("login.html", context=context)
+    return render_template("login.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -40,7 +38,8 @@ def signup():
 
 
 @app.route("/dashboard")
-def dashboard(session):
+def dashboard():
+    print(request.args.get("session"))
     return render_template("dashboard.html")
 
 

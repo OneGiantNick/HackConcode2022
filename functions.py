@@ -85,7 +85,7 @@ def login(username, password):
         tx_receipt = handleTransaction(transaction)
         # Process event
         log_to_process = tx_receipt["logs"][0]
-        processed_log = db.events.LoginEvent().processLog(log_to_process)
+        processed_log = db.events.loginEvent().processLog(log_to_process)
         session = processed_log["args"]["value"]
         return session
     except:
