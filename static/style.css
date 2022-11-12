@@ -186,14 +186,11 @@ i {
   font-size: 15px;
   display: block;
   padding: 20px 20px;
-  transition-duration:0.6s;
-	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
 }
 #navbarSupportedContent>ul>li.active>a{
 	color: #FF6961;
 	background-color: transparent;
-	transition: all 0.5s;
 }
 #navbarSupportedContent a:not(:only-child):after {
 	position: absolute;
@@ -201,19 +198,11 @@ i {
 	display: inline-block;
 	padding-right: 3px;
 	vertical-align: middle;
-	transition: 0.5s;
 }
-#navbarSupportedContent .active>a:not(:only-child):after {
-	transform: rotate(90deg);
-}
+
 .hori-selector{
-	display:inline-block;
 	position:absolute;
 	height: 100%;
-	top: 0px;
-	left: 0px;
-	transition-duration:0.6s;
-	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 	background-color: #fff;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;

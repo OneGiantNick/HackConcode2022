@@ -20,20 +20,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <div class="hori-selector">
-                    <div class="left"></div>
-                    <div class="right"></div>
-                </div>
-                <li class="{{ 'nav-item active' if active_page == 'dashboard' else 'nav-item' }}">
-                    <a class="nav-link" href="{{ url_for('dashboard')}}"><i
-                            class="fa fa-address-card-o"></i>Dashboard</a>
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="{{ 'nav-item active' if active_page == 'dashboard' else 'nav-item' }}" >
+                    <a class="nav-link" href="{{ url_for('dashboard') }}"><i class="fa fa-address-card-o"></i>Dashboard</a>
                 </li>
                 <li class="{{ 'nav-item active' if active_page == 'appointments' else 'nav-item' }}">
-                    <a class="nav-link" href="{{ url_for('appointments')}}"><i
-                            class="fa fa-calendar"></i>Appointments</a>
+                    <a class="nav-link" href="{{ url_for('appointments') }}"><i class="fa fa-calendar"></i>Appointments</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="fa fa-bar-chart"></i>My Health</a>
+                <li class="{{ 'nav-item active' if active_page == 'health' else 'nav-item' }}">
+                    <a class="nav-link" href="{{ url_for('health') }}"><i class="fa fa-bar-chart"></i>My Health</a>
                 </li>
                 <li class="nav-item" id="signout">
                     <a class="nav-link" href="{{ url_for('logout') }}"><i class="fa fa-toggle-right"></i>SIGN OUT</a>
@@ -71,6 +66,7 @@
                 "height": activeWidthNewAnimHeight + "px",
                 "width": activeWidthNewAnimWidth + "px"
             });
+
             $("#navbarSupportedContent").on("click", "li", function (e) {
                 $('#navbarSupportedContent ul li').removeClass("active");
                 $(this).addClass('active');
@@ -85,6 +81,7 @@
                     "width": activeWidthNewAnimWidth + "px"
                 });
             });
+
         }
         $(document).ready(function () {
             setTimeout(function () { test(); });
@@ -96,40 +93,9 @@
             $(".navbar-collapse").slideToggle(300);
             setTimeout(function () { test(); });
         });
-
-        // --------------add active class-on another-page move----------
-        // jQuery(document).ready(function($){
-        //     // Get current path and find target link
-        //     var path = window.location.pathname.split("/").pop();
-
-        //     // Account for home page with empty path
-        //     if ( path == '' ) {
-        //         path = 'index.html';
-        //     }
-
-        //     var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
-        //     // Add active class to target link
-        //     target.parent().addClass('active');
-        // });
-
-        // Add active class on another page linked
-        // ==========================================
-        // $(window).on('load',function () {
-        //     var current = location.pathname;
-        //     console.log(current);
-        //     $('#navbarSupportedContent ul li a').each(function(){
-        //         var $this = $(this);
-        //         // if the current path is like this link, make it active
-        //         if($this.attr('href').indexOf(current) !== -1){
-        //             $this.parent().addClass('active');
-        //             $this.parents('.menu-submenu').addClass('show-dropdown');
-        //             $this.parents('.menu-submenu').parent().addClass('active');
-        //         }else{
-        //             $this.parent().removeClass('active');
-        //         }
-        //     })
-        // });
+        
+        
+    
     </script>
 </body>
-
 </html>
