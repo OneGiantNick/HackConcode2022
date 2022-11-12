@@ -19,10 +19,24 @@ contract Session {
 contract Appointment {
     string username;
     uint256 appointment_datetime;
+    bool completed = false;
+    string prescription = "None";
 
     constructor(string memory _username, uint256 _appointment_datetime) {
         username = _username;
         appointment_datetime = _appointment_datetime;
+    }
+
+    function changeAppointmentDate(uint256 new_appointment_datetime) public {
+        appointment_datetime = new_appointment_datetime;
+    }
+
+    function changePrescription(string memory _prescription) public {
+        prescription = _prescription;
+    }
+
+    function completeAppointment() public {
+        completed = true;
     }
 }
 
@@ -82,6 +96,25 @@ contract Users {
         sessions[_username] = address(session);
         sessions_lookup.push(address(session));
         emit loginEvent(address(session));
+    }
+
+    function logout(string memory _username, address session)
+        public
+        returns (bool)
+    {
+        address[] storage sessionList = sessions[_username];
+        for (uint256 i = 0; i < sessionList.length; i++) {
+            if (sessionList[i] == session) {
+                Session(sessionList[i]).logoutSession(block.timestamp);
+                sessionList[i] = sessionList[sessionList.length - 1];
+                sessionList.pop();
+                emit LogoutEvent("logout successful");
+                return true;
+            }
+        }
+
+        emit LogoutEvent("logout failed");
+        return false;
     }
 
     function getUser(string memory _username)
