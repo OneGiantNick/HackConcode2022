@@ -128,7 +128,7 @@ def getUserAppointments(username):
         )
         tx_receipt = handleTransaction(transaction)
         log_to_process = tx_receipt["logs"][0]
-        processed_log = db.events.loginEvent().processLog(log_to_process)
+        processed_log = db.events.userAppointments().processLog(log_to_process)
         appointment_list = processed_log["args"]["appt"]
         return appointment_list
     except:

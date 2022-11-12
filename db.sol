@@ -131,7 +131,6 @@ contract Users {
 
     function getUserAppointments(string memory _username)
         public
-        view
         returns (address[] memory)
     {
         uint256 appointment_count = 0;
