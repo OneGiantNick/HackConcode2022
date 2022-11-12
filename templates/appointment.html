@@ -3,7 +3,6 @@
 {% block content %}
 <!--Put code here-->
 <form>
-    <img src="">
     <div class="entireForm">
       <div>
          <label for="username">
@@ -15,32 +14,56 @@
           <label for="date">
            Date Of Appointment:
           </label> 
-          <input  type="date" id="date">
-       </div>
-       <div>
-          <label for="postalcode">
-           Postal Code:
-          </label> 
-          <input type="text" id="postalcode">
+          <input  type="datetime-local" id="date">
        </div>
        <div>
           <label for="medicalFacility">Hospital/Clinic:</label>
           <select name="medicalFacility" id="medicalFacility">
-             <option value="Ng Teng Fong Hospital">Ng Teng Fong Hospital</option>
+             <option value="Alexandra Hospital">Alexandra Hospital</option>
+             <option value="Ang Mo Kio-Thye Hua Kwan Hospital">Ang Mo Kio-Thye Hua Kwan Hospital</option>
+             <option value="Bright Vision Hospital">Bright Vision Hospital</option>
+             <option value="Changi General Hospital">Changi General Hospital</option>
+             <option value="Complex Medical Centre">Complex Medical Centre</option>
+             <option value="Crawfurd Hospital">Crawfurd Hospital</option>
+             <option value="Farrer Park Hospital">Farrer Park Hospital</option>
+             <option value="Gleneagles Hospital">Gleneagles Hospital</option>
+             <option value="Institude of Mental Health">Institude of Mental Health</option>
+             <option value="Jurong Community Hospital">Jurong Community Hospital</option>
+             <option value="Khoo Teck Puat Hospital">Khoo Teck Puat Hospital</option>
+             <option value="KK Women's and Children Hospital">KK Women's and Children Hospital</option>
+             <option value="Mount Alvernia Hospital">Mount Alvernia Hospital</option>
+             <option value="Mount Elizabeth Hospital">Mount Elizabeth Hospital</option>
+             <option value="Mount Elizabeth Novena Hospital">Mount Elizabeth Novena Hospital</option>
+             <option value="National Heart Center Singapore">National Heart Center Singapore</option>
+             <option value="National University Hospital">National University Hospital</option>
+             <option value="Ng Teng Fong General Hospital">Ng Teng Fong General Hospital</option>
+             <option value="Outram Community Hospital">Outram Community Hospital</option>
+             <option value="Parkway East Hospital">Parkway East Hospital</option>
+             <option value="Raffles Hospital">Raffles Hospital</option>
+             <option value="Ren Ci Community Hospital">Ren Ci Community Hospital</option>
+             <option value="Sengkang Community Hospital">Sengkang Community Hospital</option>
+             <option value="Sengkang General Hospital">Sengkang General Hospital</option>
+             <option value="Singapore General Hospital">Singapore General Hospital</option>
+             <option value="St Andrew's Community Hospital">St Andrew's Community Hospital</option>
+             <option value="St Luke's Hospital">St Luke's Hospital</option>
              <option value="Tan Tock Seng Hospital">Tan Tock Seng Hospital</option>
+             <option value="Tan Tock Seng Hospital Rehabilitation Centre ">Tan Tock Seng Hospital Rehabilitation Centre</option>
+             <option value="Tan Tock Seng Hospital Subcuate Wards">Tan Tock Seng Hospital Subcuate Wards</option>
+             <option value="Thomson Medical Centre">Thomson Medical Centre</option>
+             <option value="Yishun Community Hospital">Yishun Community Hospital</option>
           </select>
        </div>
        <div>
-          <label for="typeOfIllness">What are you seeking an appointment for?</label>
-          <div class="inline">
+          <label>What are you seeking an appointment for?</label>
+          <div class="medicalConditions">
              <label for="stomachache">Stomachache</label>
              <input type="radio" name="ilness" id="stomachache">
           </div>
-          <div class="inline">
+          <div class="medicalConditions">
              <label for="covid">Covid</label>
              <input type="radio" name="ilness" id="covid">
           </div>
-          <div class="inline">
+          <div class="medicalConditions">
              <label for="others">
                 Others
              </label>
