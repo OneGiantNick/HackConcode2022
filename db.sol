@@ -50,8 +50,7 @@ contract Users {
         string sex;
         int256 height;
         int256 weight;
-
-        string role = 'user';
+        string role;
     }
 
     mapping(string => UserData) private users;
@@ -78,6 +77,7 @@ contract Users {
             sex='',
             height=0;
             weight=0;
+            role='user';
             );
         users[_username] = newUser;
         users_lookup.push(_username);
