@@ -43,5 +43,10 @@ def dashboard():
     return render_template("dashboard.html")
 
 
+@app.route("/appointments")
+def appointments():
+    return render_template("appointment.html")
+
+
 if __name__ == "__main__":
     app.run()
