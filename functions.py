@@ -111,7 +111,7 @@ def logout(session):
 
 
 def getUser(username):
-    db.functions.getUser(username).call()
+    return db.functions.getUser(username).call()
 
 
 def getUserAppointments(username):
@@ -133,3 +133,11 @@ def getUserAppointments(username):
         return appointment_list
     except:
         return "error"
+
+
+def getAllUsers():
+    return db.functions.getAllUsers().call()
+
+
+def getAllAppointments():
+    return db.functions.getAllAppointments().call()
