@@ -1,4 +1,4 @@
-// SPDX-Licence-Identifier: MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
 contract Session {
@@ -74,11 +74,11 @@ contract Users {
         UserData memory newUser = UserData(
             _username,
             hashed_password,
-            sex='',
-            height=0,
-            weight=0,
-            role='user',
-            );
+            "",
+            0,
+            0,
+            "user"
+        );
         users[_username] = newUser;
         users_lookup.push(_username);
     }
@@ -109,28 +109,16 @@ contract Users {
         emit loginEvent(address(session));
     }
 
-    function logout(string memory _username, address session)
+    /*    function logout(string memory _username, address session)
         public
         returns (bool)
     {
-        address[] storage sessionList = sessions[_username];
-        for (uint256 i = 0; i < sessionList.length; i++) {
-            if (sessionList[i] == session) {
-                Session(sessionList[i]).logoutSession(block.timestamp);
-                sessionList[i] = sessionList[sessionList.length - 1];
-                sessionList.pop();
-                emit LogoutEvent("logout successful");
-                return true;
-            }
-        }
-
-        emit LogoutEvent("logout failed");
-        return false;
+        sessions[_username].logoutSession(block.timestamp);
     }
-
+*/
     function giveRole(string memory _username, string memory _role) public {
-        for (uint256 i=0; i < users_lookup; i++) {
-            if (compareStrings(users_lookup[i], username)) {
+        for (uint256 i = 0; i < users_lookup; i++) {
+            if (compareStrings(users_lookup[i], _username)) {
                 users[users_lookup[i]].role = _role;
             }
         }
