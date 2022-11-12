@@ -6,7 +6,8 @@ app.debug = True
 @app.route("/")
 def login():
     return render_template("login.html")
-
+def signup():
+    return render_template("signup.html")
 
 if __name__ == "__main__":
     app.run()

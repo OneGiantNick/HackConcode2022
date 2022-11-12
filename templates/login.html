@@ -11,7 +11,25 @@
   </head>
     <div id="overlay">
         <div id="text">
-            <h1>Login</h1>
+            <div class="login-box">
+                <h2>HealthBox</h2>
+                <form method="POST" action="">
+                  <div class="user-box">
+                    <label for="exampleInputEmail1"></label>
+                    <input name="exampleInputUsername1" type="username" class="form-control" id="exampleInputUsername1"
+                      placeholder="Username" required="">
+                  </div>
+                  <div class="user-box">
+                    <label for="exampleInputPassword1"></label>
+                    <input name="exampleInputPassword1" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
+                    {% if incorrectDetails %}
+                    <small id="incorrectDetails" class="'form-text text-muted">Invalid username or password</small>
+                    {% endif %}
+                  </div>
+                  <button type="submit" onclick="showOverlay()" class="btn btn-primary">Login</button>
+
+                </form>
+              </div>
         </div>
     </div>
 
