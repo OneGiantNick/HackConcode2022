@@ -52,8 +52,8 @@ contract Users {
         string username;
         bytes32 password;
         string sex;
-        int256 height;
-        int256 weight;
+        uint256 height;
+        uint256 weight;
         string role;
         bool new_person;
     }
@@ -127,16 +127,17 @@ contract Users {
         }
     }
 
-    function updateNewcomer(string memory _username
-                            string memory _sex,
-                            uint256 height,
-                            uint256 weight,
-                            ) public {
+    function updateNewcomer(
+        string memory _username,
+        string memory _sex,
+        uint256 _height,
+        uint256 _weight
+    ) public {
         users[_username].sex = _sex;
         users[_username].height = _height;
         users[_username].weight = _weight;
-        users[_username].new_person = False;
-                            }
+        users[_username].new_person = false;
+    }
 
     function getUser(string memory _username)
         external
@@ -145,8 +146,8 @@ contract Users {
             string memory username,
             bytes32 password,
             string memory sex,
-            int256 height,
-            int256 weight,
+            uint256 height,
+            uint256 weight,
             string memory role,
             bool new_person
         )
