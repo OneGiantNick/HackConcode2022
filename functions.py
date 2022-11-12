@@ -1,5 +1,5 @@
 import json
-from web3 import Web3, EthereumTesterProvider
+from web3 import Web3
 import wallet_details
 
 with open("data.json", "r") as f:
@@ -25,33 +25,33 @@ db = w3.eth.contract(address=dbsol_contract_address, abi=users_abi)
 
 
 def handleTransaction(transaction):
-    try:
-        signed_txn = w3.eth.account.sign_transaction(
-            transaction, private_key=private_key
-        )
-        print("Sending Transaction!")
-        # Sending txn
-        tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-        # Wait for the transaction to be mined, and get the transaction receipt
-        print("Waiting for transaction to finish...")
-        tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-        print("Done!")
-    except:
-        EthereumTesterProvider.fetch_transaction_revert_reason(w3, tx_hash)
+    signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
+    print("Sending Transaction!")
+    # Sending txn
+    tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+    # Wait for the transaction to be mined, and get the transaction receipt
+    print("Waiting for transaction to finish...")
+    tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+    print("Done!")
+    return tx_receipt
 
 
 def createUser(username, password):
     print(f"Attempting to create user: {username} with password: {password}")
-    nonce = w3.eth.getTransactionCount(my_address)
-    transaction = db.functions.createUser(username, password).buildTransaction(
-        {
-            "chainId": chain_id,
-            "gasPrice": w3.eth.gas_price,
-            "from": my_address,
-            "nonce": nonce,
-        }
-    )
-    handleTransaction(transaction)
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.createUser(username, password).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        handleTransaction(transaction)
+        return "success"
+    except:
+        return "Username already taken"
 
 
 def createAppointment(username, appointment_datetime):
@@ -72,13 +72,21 @@ def createAppointment(username, appointment_datetime):
 
 def login(username, password):
     print(f"Attempting to log in {username}")
-    nonce = w3.eth.getTransactionCount(my_address)
-    transaction = db.functions.login(username, password).buildTransaction(
-        {
-            "chainId": chain_id,
-            "gasPrice": w3.eth.gas_price,
-            "from": my_address,
-            "nonce": nonce,
-        }
-    )
-    handleTransaction(transaction)
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.login(username, password).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        # Process event
+        log_to_process = tx_receipt["logs"][0]
+        processed_log = db.events.LoginEvent().processLog(log_to_process)
+        session = processed_log["args"]["value"]
+        return session
+    except:
+        return "error"
