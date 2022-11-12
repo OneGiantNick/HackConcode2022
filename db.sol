@@ -123,6 +123,17 @@ contract Users {
         }
     }
 
+    function updateNewcomer(string memory _username
+                            string memory _sex,
+                            uint256 height,
+                            uint256 weight,
+                            ) public {
+        users[_username].sex = _sex;
+        users[_username].height = _height;
+        users[_username].weight = _weight;
+        users[_username].new_person = False;
+                            }
+
     function getUser(string memory _username)
         external
         view

@@ -110,8 +110,17 @@ def logout(session):
         return "error"
 
 
+def updateNewcomer(username, sex, height, weight):
+    pass
+
+
 def getUser(username):
     return db.functions.getUser(username).call()
+
+
+def getUserFromSession(session_contract_address):
+    session = w3.eth.contract(address=session_contract_address, abi=session_abi)
+    return session.call().username()
 
 
 def getUserAppointments(username):
