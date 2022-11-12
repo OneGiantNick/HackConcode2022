@@ -18,6 +18,11 @@ path {
   stroke-width: 0.5px;
 }
 
+small{
+  font-size: 14px;
+  color: red;
+  margin-top: -20px;
+}
 #box {
   color:#FF6961;
 }
