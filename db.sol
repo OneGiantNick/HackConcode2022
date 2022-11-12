@@ -42,7 +42,7 @@ contract Users {
     address[] sessions_lookup;
 
     mapping(address => string) private appointments;
-    address[] addresses_lookup;
+    address[] appointments_lookup;
 
     function createUser(string memory _username, string memory _password)
         public
@@ -67,7 +67,7 @@ contract Users {
             _appointment_datetime
         );
         appointments[address(appointment)] = _username;
-        addresses_lookup.push(address(appointment));
+        appointments_lookup.push(address(appointment));
     }
 
     function login(string memory _username, string memory _password) public {
@@ -92,12 +92,43 @@ contract Users {
         return users[_username];
     }
 
+    function getUserAppointments(string memory _username)
+        public
+        view
+        returns (address[] memory)
+    {
+        uint256 appointment_count = 0;
+        for (uint256 i = 0; i < appointments_lookup.length; i++) {
+            if (
+                compareStrings(_username, appointments[appointments_lookup[i]])
+            ) {
+                appointment_count++;
+            }
+        }
+
+        uint256 j = 0;
+        address[] memory user_appointments = new address[](appointment_count);
+        for (uint256 i = 0; i < appointments_lookup.length; i++) {
+            if (
+                compareStrings(_username, appointments[appointments_lookup[i]])
+            ) {
+                user_appointments[j] = appointments_lookup[i];
+                j++;
+            }
+        }
+        return user_appointments;
+    }
+
     function getAllUsers() public view returns (UserData[] memory) {
         UserData[] memory allUsers = new UserData[](users_lookup.length);
         for (uint256 i = 0; i < users_lookup.length; i++) {
             allUsers[i] = users[users_lookup[i]];
         }
         return allUsers;
+    }
+
+    function getAllAppointments() public view returns (address[] memory) {
+        return appointments_lookup;
     }
 
     function comparePassword(bytes32 a, bytes32 b) public pure returns (bool) {
