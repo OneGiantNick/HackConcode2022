@@ -6,6 +6,8 @@ app.debug = True
 @app.route("/")
 def login():
     return render_template("login.html")
+
+@app.route("/s")
 def signup():
     return render_template("signup.html")
 

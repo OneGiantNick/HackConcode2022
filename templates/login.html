@@ -12,7 +12,7 @@
     <div id="overlay">
         <div id="text">
             <div class="login-box">
-                <h2>HealthBox</h2>
+                <h2>Health<span id="box">UP</span></h2>
                 <form method="POST" action="">
                   <div class="user-box">
                     <label for="exampleInputEmail1"></label>
@@ -27,7 +27,7 @@
                     {% endif %}
                   </div>
                   <button type="submit" onclick="showOverlay()" class="btn btn-primary">Login</button>
-
+                  <a class="signupbtn" href="{{ url_for('signup')}}" role="button">Sign up</a>
                 </form>
               </div>
         </div>
