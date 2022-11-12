@@ -22,15 +22,14 @@ def login():
     return render_template("login.html", context=context)
 
 
-<<<<<<< Updated upstream
-@app.route("/signup")
-=======
 @app.route("/signup", methods=["GET", "POST"])
->>>>>>> Stashed changes
 def signup():
     context = {"title": "Sign up"}
     if request.method == "POST":
-        result = functions.createUser(request.form.get(""))
+        username = request.form.get("signUpUsername1")
+        password = request.form.get("signUpPassword1")
+        print(functions.createUser(username, password)
+        return redirect(url_for(login))
     return render_template("signup.html")
 
 
