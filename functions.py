@@ -111,7 +111,23 @@ def logout(session):
 
 
 def updateNewcomer(username, sex, height, weight):
-    pass
+    print(f"Initialising new user")
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.updateNewcomer(
+            username, sex, height, weight
+        ).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        return "success"
+    except:
+        return "error"
 
 
 def getUser(username):
@@ -120,7 +136,7 @@ def getUser(username):
 
 def getUserFromSession(session_contract_address):
     session = w3.eth.contract(address=session_contract_address, abi=session_abi)
-    return session.call().username()
+    return session.functions.call().username()
 
 
 def getUserAppointments(username):
