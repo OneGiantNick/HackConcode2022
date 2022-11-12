@@ -51,7 +51,7 @@ def createUser(username, password):
         handleTransaction(transaction)
         return "success"
     except:
-        return "Username already taken"
+        return "error"
 
 
 def createAppointment(username, appointment_datetime):

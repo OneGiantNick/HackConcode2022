@@ -24,19 +24,25 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    context = {"title": "Sign up"}
     if request.method == "POST":
-        username = request.form.get("signUpUsername1")
-        password = request.form.get("signUpPassword1")
-        print(functions.createUser(username, password)
-        return redirect(url_for(login))
+        if request.form.get("signUpPassword1") != request.form.get("signUpPassword2"):
+            return render_template("signup.html", noPasswordMatch=True)
+
+        result = functions.createUser(
+            request.form.get("signUpUsername1"), request.form.get("signUpPassword1")
+        )
+        if result == "error":
+            return render_template("signup.html", usernameExists=True)
+
+        return redirect(url_for("login"))
+
     return render_template("signup.html")
-
-
-if __name__ == "__main__":
-    app.run()
 
 
 @app.route("/dashboard")
 def dashboard(session):
     return render_template("dashboard.html")
+
+
+if __name__ == "__main__":
+    app.run()
