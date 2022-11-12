@@ -47,6 +47,11 @@ contract Users {
     struct UserData {
         string username;
         bytes32 password;
+        string sex = '';
+        int256 height = 0;
+        int256 weight = 0;
+
+        string role = 'user';
     }
 
     mapping(string => UserData) private users;
@@ -115,6 +120,14 @@ contract Users {
 
         emit LogoutEvent("logout failed");
         return false;
+    }
+
+    function giveRole(string memory _username, string memory _role) public {
+        for (uint256 i=0; i < users_lookup; i++) {
+            if (compareStrings(users_lookup[i], username)) {
+                users[users_lookup[i]].role = _role;
+            }
+        }
     }
 
     function getUser(string memory _username)
