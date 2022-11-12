@@ -17,6 +17,8 @@ def login():
 
         resp = make_response(redirect(url_for("dashboard")))
         resp.set_cookie("session_address", result)
+        if functions.getUser(request.form.get("exampleInputUsername1"))[6] == True:
+            return redirect(url_for("welcome"))
         return resp
 
     return render_template("login.html")
@@ -48,9 +50,10 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/welcome")
+@app.route("/welcome", methods=["GET", "POST"])
 def welcome():
-    pass
+    if request.method == "POST":
+        return redirect(url_for("dashboard"))
 
 
 @app.route("/dashboard")
