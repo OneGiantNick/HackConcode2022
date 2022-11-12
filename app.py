@@ -50,12 +50,19 @@ def signup():
 
 @app.route("/dashboard")
 def dashboard():
-    session = request.args.get("session")
+    session = request.cookies.get("session_address")
+    if session == None:
+        return redirect(url_for("login"))
+
     return render_template("dashboard.html")
 
 
 @app.route("/appointments")
 def appointments():
+    session = request.cookies.get("session_address")
+    if session == None:
+        return redirect(url_for("login"))
+
     return render_template("appointment.html")
 
 

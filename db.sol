@@ -42,6 +42,7 @@ contract Appointment {
 
 contract Users {
     event loginEvent(address value);
+    event userAppointments(address[] appt);
 
     struct UserData {
         string username;
@@ -152,6 +153,7 @@ contract Users {
                 j++;
             }
         }
+        emit userAppointments(user_appointments);
         return user_appointments;
     }
 

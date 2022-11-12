@@ -108,3 +108,28 @@ def logout(session):
         return session
     except:
         return "error"
+
+
+def getUser(username):
+    db.functions.getUser(username).call()
+
+
+def getUserAppointments(username):
+    print(f"Generating appointments from {username}")
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.getUserAppointments(username).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        log_to_process = tx_receipt["logs"][0]
+        processed_log = db.events.loginEvent().processLog(log_to_process)
+        appointment_list = processed_log["args"]["appt"]
+        return appointment_list
+    except:
+        return "error"
