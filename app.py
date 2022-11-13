@@ -116,6 +116,21 @@ def health():
                                         weight=_weight,
                                         bmi = _bmi)
 
+@app.route("/setup", methods=["GET", "POST"])
+def setup():
+    session = cookiejar["session_address"]
+    username = str(functions.getUserFromSession(session))
+    if request.method == "POST":
+        functions.updateNewcomer(
+            username,
+            request.form.get("sex"),
+            request.form.get("height"),
+            request.form.get("weight"),
+        )
+        return redirect(url_for("health"))
+    return render_template("setup.html")
+
+
 
 if __name__ == "__main__":
     app.run()

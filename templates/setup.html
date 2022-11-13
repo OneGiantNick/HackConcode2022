@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% set active_page = "health" %}
+{% block content %}
+<div class="login-box">
+    <h2>Update<span id="box">Details</span></h2>
+    <form method="POST" action="">
+      <div class="user-box">
+        <label for="height"></label>
+        <input name="height" type="number" class="form-control" id="height" placeholder="Height in cm" required="">
+      </div>
+      <div class="user-box">
+        <label for="weight"></label>
+        <input name="weight" type="number" class="form-control" id="weight" placeholder="Weight in kg" required="">
+      </div>
+      <div class="user-box">
+        <label for="sex"></label>
+        <input name="sex" type="string" class="form-control" id="sex" placeholder="Sex" required="">
+      </div>
+      <button type="submit" onclick="showOverlay()" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}
