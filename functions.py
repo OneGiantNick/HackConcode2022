@@ -54,11 +54,11 @@ def createUser(username, password):
         return "error"
 
 
-def createAppointment(username, appointment_datetime):
+def createAppointment(username, location, appointment_datetime, symptoms):
     print(f"Making appointment for {username} at {appointment_datetime}")
     nonce = w3.eth.getTransactionCount(my_address)
     transaction = db.functions.createAppointment(
-        username, appointment_datetime
+        username, location, appointment_datetime, symptoms
     ).buildTransaction(
         {
             "chainId": chain_id,
