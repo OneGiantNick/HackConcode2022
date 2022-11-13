@@ -2,4 +2,76 @@
 {% set active_page = "dashboard" %}
 
 {% block content %}
+<div class="greeting">
+    <h1 class="welcome">Welcome!</h1>
+    <br>
+    <p><b>Good to see you here, <span id="user">{{username}}</span></b></p>
+    <br>
+    <br>
+    <a class="appoint" href="{{ url_for('appointments') }}">Book Appointment</a>
+</div>
+<div class="slide-container">
+    <div class="slides">
+        <div id='slide_1' class="slide img_1"></div>
+        <div id='slide_2' class="slide img_2"></div>
+        <div id='slide_3' class="slide img_3"></div>
+        <div id='slide_4' class="slide img_4"></div>
+    </div>
+</div>
+<p id="hi">hi</p>
+
+
+
+<script>
+    let slides = document.querySelectorAll(".slide");
+    let container = document.querySelector(".container");
+    let speed = 250;
+    let idx = 0;
+
+    let clickable = true;
+
+    function resetAnimation() {
+    this.style.WebkitAnimation = "";
+    this.style.animation = "";
+    }
+
+    function setAnimation(slide) {
+    slide.style.WebkitAnimation = `move ${speed}ms`;
+    slide.style.animation = `move ${speed}ms`;
+    slide.addEventListener("webkitAnimationEnd", resetAnimation);
+    slide.id = `slide_${4}`;
+    }
+
+    function moveThis(e) {
+    if (clickable && e.target.classList.contains("slide")) {
+        clickable = false;
+        if (idx == 4) idx = 0;
+
+        let siblingNext = slides[idx].nextElementSibling;
+        let siblingPrev = slides[idx].previousElementSibling;
+        let prev = slides[0].parentElement.children.length - 1;
+        let next = 1;
+
+        setAnimation(slides[idx]);
+
+        while (siblingNext) {
+        siblingNext.id = `slide_${next}`;
+        siblingNext = siblingNext.nextElementSibling;
+        next++;
+        }
+
+        while (siblingPrev) {
+        siblingPrev.id = `slide_${prev}`;
+        siblingPrev = siblingPrev.previousElementSibling;
+        prev--;
+        }
+
+        idx++;
+        setTimeout(() => (clickable = true), speed);
+    }
+    }
+
+    container.onclick = moveThis;
+
+  </script>
 {% endblock %}

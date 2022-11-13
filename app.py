@@ -70,13 +70,15 @@ def welcome():
     return render_template("welcome.html")
 
 
-@app.route("/dashboard")
+@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     session = cookiejar["session_address"]
+    user = str(functions.getUserFromSession(session))
     if session == None:
         return redirect(url_for("login"))
 
-    return render_template("dashboard.html")
+
+    return render_template("dashboard.html", username=user)
 
 
 @app.route("/appointments")
