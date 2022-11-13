@@ -3,7 +3,6 @@ import functions
 from datetime import datetime
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
-app.debug = True
 
 cookiejar = {}
 
@@ -105,7 +104,7 @@ def appointments():
     if len(appointment_list) != 0:
         appointment_list_info = []
         print(len(appointment_list))
-        
+
         for i in range(len(appointment_list)):
             appointtime = functions.getAppointmentDate(appointment_list[i])
             timestring = datetime.fromtimestamp(appointtime)
