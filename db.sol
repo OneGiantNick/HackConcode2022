@@ -42,14 +42,16 @@ contract Appointment {
 
 contract Users {
     event loginEvent(address value);
+    event userAppointments(address[] appt);
 
     struct UserData {
         string username;
         bytes32 password;
         string sex;
-        int256 height;
-        int256 weight;
+        uint256 height;
+        uint256 weight;
         string role;
+        bool new_person;
     }
 
     mapping(string => UserData) private users;
@@ -76,7 +78,8 @@ contract Users {
             "",
             0,
             0,
-            "user"
+            "user",
+            true
         );
         users[_username] = newUser;
         users_lookup.push(_username);
@@ -120,17 +123,45 @@ contract Users {
         }
     }
 
+    function updateNewcomer(
+        string memory _username,
+        string memory _sex,
+        uint256 _height,
+        uint256 _weight
+    ) public {
+        users[_username].sex = _sex;
+        users[_username].height = _height;
+        users[_username].weight = _weight;
+        users[_username].new_person = false;
+        users[_username].new_person = false;
+    }
+
     function getUser(string memory _username)
         external
         view
-        returns (UserData memory)
+        returns (
+            string memory username,
+            bytes32 password,
+            string memory sex,
+            uint256 height,
+            uint256 weight,
+            string memory role,
+            bool new_person
+        )
     {
-        return users[_username];
+        return (
+            users[_username].username,
+            users[_username].password,
+            users[_username].sex,
+            users[_username].height,
+            users[_username].weight,
+            users[_username].role,
+            users[_username].new_person
+        );
     }
 
     function getUserAppointments(string memory _username)
         public
-        view
         returns (address[] memory)
     {
         uint256 appointment_count = 0;
@@ -152,6 +183,7 @@ contract Users {
                 j++;
             }
         }
+        emit userAppointments(user_appointments);
         return user_appointments;
     }
 

@@ -1,8 +1,10 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, make_response
 import functions
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.debug = True
+
+cookiejar = {}
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -15,9 +17,26 @@ def login():
         if result == "error":
             return render_template("login.html", incorrectDetails=True)
 
-        return redirect(url_for("dashboard", session=result))
+        resp = make_response(redirect(url_for("dashboard")))
+        cookiejar["session_address"] = result
+
+        resp.set_cookie("session_address", result, domain="127.0.0.1")
+        if functions.getUser(request.form.get("exampleInputUsername1"))[6] == True:
+            return redirect(url_for("welcome"))
+        return resp
 
     return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session = cookiejar["session_address"]
+    try:
+        functions.logout(session)
+    except:
+        pass
+    cookiejar["session_address"] = None
+    return redirect(url_for("login"))
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -37,15 +56,43 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/dashboard")
+@app.route("/welcome", methods=["GET", "POST"])
+def welcome():
+    if request.method == "POST":
+        session = cookiejar["session_address"]
+        functions.updateNewcomer(
+            print(functions.getUserFromSession(session)),
+            request.form.get("sex"),
+            request.form.get("height"),
+            request.form.get("weight"),
+        )
+        return redirect(url_for("dashboard"))
+    return render_template("welcome.html")
+
+
+@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    print(request.args.get("session"))
-    return render_template("dashboard.html")
+    session = cookiejar["session_address"]
+    user = str(functions.getUserFromSession(session))
+    if session == None:
+        return redirect(url_for("login"))
+
+
+    return render_template("dashboard.html", username=user)
 
 
 @app.route("/appointments")
 def appointments():
+    session = cookiejar["session_address"]
+    if session == None:
+        return redirect(url_for("login"))
+
     return render_template("appointment.html")
+
+
+@app.route("/health")
+def health():
+    return render_template("health.html")
 
 
 if __name__ == "__main__":

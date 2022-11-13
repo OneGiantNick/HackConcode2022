@@ -90,3 +90,81 @@ def login(username, password):
         return session
     except:
         return "error"
+
+
+def logout(session):
+    print(f"Attempting to log out from {session}")
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.logout(session).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        return session
+    except:
+        return "error"
+
+
+def updateNewcomer(username, sex, height, weight):
+    print(f"Initialising new user")
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.updateNewcomer(
+            username, sex, height, weight
+        ).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        return "success"
+    except:
+        return "error"
+
+
+def getUser(username):
+    return db.functions.getUser(username).call()
+
+
+def getUserFromSession(session_contract_address):
+    print(session_contract_address)
+    session = w3.eth.contract(address=session_contract_address, abi=session_abi)
+
+    return session.functions.username().call()
+
+
+def getUserAppointments(username):
+    print(f"Generating appointments from {username}")
+    try:
+        nonce = w3.eth.getTransactionCount(my_address)
+        transaction = db.functions.getUserAppointments(username).buildTransaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        tx_receipt = handleTransaction(transaction)
+        log_to_process = tx_receipt["logs"][0]
+        processed_log = db.events.userAppointments().processLog(log_to_process)
+        appointment_list = processed_log["args"]["appt"]
+        return appointment_list
+    except:
+        return "error"
+
+
+def getAllUsers():
+    return db.functions.getAllUsers().call()
+
+
+def getAllAppointments():
+    return db.functions.getAllAppointments().call()
