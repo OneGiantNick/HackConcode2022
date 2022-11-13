@@ -472,3 +472,18 @@ i {
 .records{
   background-color:white;
 }
+
+
+.section{
+  margin-bottom: 5px;
+
+}
+
+.medicalConditions{
+  display:inline-block;
+}
+
+.entireForm{
+  max-width: 800px;
+  background-color: #74BBFB;
+}
