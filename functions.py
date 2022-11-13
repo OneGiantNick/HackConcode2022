@@ -142,6 +142,11 @@ def getUserFromSession(session_contract_address):
     return session.functions.username().call()
 
 
+def getAppointmentDate(session_contract_address):
+    session = w3.eth.contract(address=session, abi=session.abi)
+    return session.functions.appointment_datetime().call()
+
+
 def getUserAppointments(username):
     print(f"Generating appointments from {username}")
     try:
