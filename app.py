@@ -88,8 +88,15 @@ def appointments():
     session = cookiejar["session_address"]
     if session == None:
         return redirect(url_for("login"))
-
-    return render_template("appointment.html")
+    username = functions.getUserFromSession(session)
+    appointment_list = functions.getUserAppointments(username)
+    if len(appointment_list) != 0:
+        appointment_list_info = []
+        for i in range(len(appointment_list)):
+            info = (username, functions.getAppointmentDate(session))
+            appointment_list_info.push(info)
+    message = "No appointments... Make one now!"
+    return render_template("appointment.html", message=message)
 
 
 @app.route("/health")
