@@ -133,7 +133,6 @@ contract Users {
         users[_username].height = _height;
         users[_username].weight = _weight;
         users[_username].new_person = false;
-        users[_username].new_person = false;
     }
 
     function getUser(string memory _username)

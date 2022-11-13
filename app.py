@@ -58,10 +58,13 @@ def signup():
 
 @app.route("/welcome", methods=["GET", "POST"])
 def welcome():
+    session = cookiejar["session_address"]
+    username = str(functions.getUserFromSession(session))
+    if functions.getUser(username)[6] == False:
+        return redirect(url_for("dashboard"))
     if request.method == "POST":
-        session = cookiejar["session_address"]
         functions.updateNewcomer(
-            print(functions.getUserFromSession(session)),
+            username,
             request.form.get("sex"),
             request.form.get("height"),
             request.form.get("weight"),
@@ -77,7 +80,6 @@ def dashboard():
     if session == None:
         return redirect(url_for("login"))
 
-
     return render_template("dashboard.html", username=user)
 
 
@@ -92,6 +94,12 @@ def appointments():
 
 @app.route("/health")
 def health():
+    session = cookiejar["session_address"]
+    if session == None:
+        return redirect(url_for("login"))
+    username = functions.getUserFromSession(session)
+    data = functions.getUser(username)
+    print(data)
     return render_template("health.html")
 
 
