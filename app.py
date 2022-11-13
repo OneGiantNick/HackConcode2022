@@ -4,6 +4,8 @@ import functions
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.debug = True
 
+cookiejar = {}
+
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -16,7 +18,9 @@ def login():
             return render_template("login.html", incorrectDetails=True)
 
         resp = make_response(redirect(url_for("dashboard")))
-        resp.set_cookie("session_address", result)
+        cookiejar["session_address"] = result
+
+        resp.set_cookie("session_address", result, domain="127.0.0.1")
         if functions.getUser(request.form.get("exampleInputUsername1"))[6] == True:
             return redirect(url_for("welcome"))
         return resp
@@ -26,11 +30,13 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session = request.cookies.get("session_address")
-    functions.logout(session)
-    resp = make_response(redirect(url_for("login")))
-    resp.set_cookie("session_address", "", expires=0)
-    return resp
+    session = cookiejar["session_address"]
+    try:
+        functions.logout(session)
+    except:
+        pass
+    cookiejar["session_address"] = None
+    return redirect(url_for("login"))
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -53,12 +59,20 @@ def signup():
 @app.route("/welcome", methods=["GET", "POST"])
 def welcome():
     if request.method == "POST":
+        session = cookiejar["session_address"]
+        functions.updateNewcomer(
+            print(functions.getUserFromSession(session)),
+            request.form.get("sex"),
+            request.form.get("height"),
+            request.form.get("weight"),
+        )
         return redirect(url_for("dashboard"))
+    return render_template("welcome.html")
 
 
 @app.route("/dashboard")
 def dashboard():
-    session = request.cookies.get("session_address")
+    session = cookiejar["session_address"]
     if session == None:
         return redirect(url_for("login"))
 
@@ -67,7 +81,7 @@ def dashboard():
 
 @app.route("/appointments")
 def appointments():
-    session = request.cookies.get("session_address")
+    session = cookiejar["session_address"]
     if session == None:
         return redirect(url_for("login"))
 

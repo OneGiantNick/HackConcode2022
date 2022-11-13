@@ -135,8 +135,10 @@ def getUser(username):
 
 
 def getUserFromSession(session_contract_address):
+    print(session_contract_address)
     session = w3.eth.contract(address=session_contract_address, abi=session_abi)
-    return session.functions.getUserFromSession().call()
+    print(session.functions.username().call())
+    return session.functions.username()
 
 
 def getUserAppointments(username):

@@ -14,10 +14,6 @@ contract Session {
     function logoutSession(uint256 logout) public {
         logout_datetime = logout;
     }
-
-    function getUserFromSession() external view returns (string memory) {
-        return username;
-    }
 }
 
 contract Appointment {
@@ -136,6 +132,7 @@ contract Users {
         users[_username].sex = _sex;
         users[_username].height = _height;
         users[_username].weight = _weight;
+        users[_username].new_person = false;
         users[_username].new_person = false;
     }
 
