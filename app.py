@@ -105,12 +105,15 @@ def appointments():
     if len(appointment_list) != 0:
         appointment_list_info = []
         print(len(appointment_list))
+        
         for i in range(len(appointment_list)):
+            appointtime = functions.getAppointmentDate(appointment_list[i])
+            timestring = datetime.fromtimestamp(appointtime)
             print(appointment_list[i])
             info = (
                 username,
                 functions.getLocation(appointment_list[i]),
-                functions.getAppointmentDate(appointment_list[i]),
+                timestring,
                 functions.getSymptoms(appointment_list[i]),
                 functions.getCompleted(appointment_list[i]),
                 functions.getPrescriptions(appointment_list[i]),

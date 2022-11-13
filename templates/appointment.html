@@ -2,7 +2,7 @@
 {% set active_page = "appointments" %}
 {% block content %}
 <!--Put code here-->
-<div class="login-box">
+<div class="appointment-box">
    <h2>Create<span id="box">Appointment</span></h2>
    <form method="POST" action="">
       <div class="user-box">
@@ -22,17 +22,18 @@
    </form>
 </div>
 {% if message %}
-<h2>{{ message }}</h2>
+<h2 class="title">{{ message }}</h2>
 {% endif %}
 
 {% if data %}
+<br>
 <table>
    <tr>
       <th class="text-left">Username</th>
       <th class="text-left">Location</th>
-      <th class="text-left">Appointment_datetime</th>
+      <th class="text-left">Appointment</th>
       <th class="text-left">Symptoms</th>
-      <th class="text-left">Completed?</th>
+      <th class="text-left">Completed</th>
       <th class="text-left">Prescriptions</th>
    </tr>
    {% for username, location, appointment_datetime, symptoms, completed, prescriptions in data %}
