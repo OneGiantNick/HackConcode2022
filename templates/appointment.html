@@ -6,19 +6,19 @@
 <!--Put code here-->
 <form method="POST">
     <div class="entireForm">
-      <div>
+      <div class="section">
          <label for="username">
           Username:
          </label> 
          <input type="text" id="username">
       </div>
-      <div>
+      <div class="section">
           <label for="date">
            Date Of Appointment:
           </label> 
           <input  type="datetime-local" id="date">
        </div>
-       <div>
+       <div class="section">
           <label for="medicalFacility">Hospital/Clinic:</label>
           <select name="medicalFacility" id="medicalFacility">
              <option value="Alexandra Hospital">Alexandra Hospital</option>
@@ -55,8 +55,8 @@
              <option value="Yishun Community Hospital">Yishun Community Hospital</option>
           </select>
        </div>
-       <div>
-          <label>What are you seeking an appointment for?</label>
+       <div class="section">
+          <label class="what">What are you seeking an appointment for ?</label>
           <div class="medicalConditions">
              <label for="chestPains">Chest pains</label>
              <input type="radio" name="illness" id="chestPains">
@@ -68,7 +68,7 @@
           <div class="medicalConditions">
             <label for="toothaches">Toothaches</label>
             <input type="radio" name="illness" id="toothaches">
-         </div>
+          </div>
          <div class="medicalConditions">
             <label for="brokenBonesAndSprains">Broken Bones And Sprains</label>
             <input type="radio" name="illness" id="brokenBonesAndSprains">
@@ -114,4 +114,5 @@
        <button type="submit">Submit</button>
        </div>
   </form>
+  <script><iframe src="https://www.google.com/maps/d/u/0/embed?mid=1iSmj7jgCprWwW2g5KzTloEvIWQLA6Sc&ehbc=2E312F" width="640" height="480"></iframe></script>
 {% endblock %}

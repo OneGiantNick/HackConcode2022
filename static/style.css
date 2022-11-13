@@ -157,12 +157,25 @@ path {
 
 .medicalConditions{
   display:inline;
+  margin-right: 5px;
 }
 
+.what{
+  display:block;
+}
 
+.section{
+  margin-bottom: 10px;
+  font-size: larger;
+}
 
 .entireForm{
-  width:100%;
-  height:100%;
+  border: 1px solid red;
   background-image: url(./hospital.jpg);
+  background-size: cover;
 }
+
+
+
+
+
