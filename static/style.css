@@ -476,6 +476,7 @@ i {
 
 .section{
   margin-bottom: 5px;
+  font-size: larger;
 
 }
 
@@ -486,4 +487,12 @@ i {
 .entireForm{
   max-width: 800px;
   background-color: #74BBFB;
+}
+
+.appointmentbtn{
+  margin-left: 5px;
+  background-color: #ff9900;
+  color:#E21143;
+
+
 }
