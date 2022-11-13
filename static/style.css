@@ -349,9 +349,9 @@ i {
 
 .slide {
   user-select: none;
-  line-height: 150px;
   display: block;
   position: absolute;
+  line-height: 100px;
   top: 50%;
   left: 50%;
   width: 80%;
@@ -366,22 +366,29 @@ i {
   cursor: pointer;
   transition: all .5s;
   border-radius: 15px;
+  font-size: 50px;
+  text-align: center;
+  color: white;
 }
 
 .img_1 {
-  background-image: url(https://images.pexels.com/photos/1548111/pexels-photo-1548111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  /* background-image: url(https://images.pexels.com/photos/1548111/pexels-photo-1548111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+  background-color:red
 }
 
 .img_2 {
-  background-image: url(https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  /* background-image: url(https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+  background-color:green
 }
 
 .img_3 {
-  background-image: url(https://images.pexels.com/photos/1789968/pexels-photo-1789968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  /* background-image: url(https://images.pexels.com/photos/1789968/pexels-photo-1789968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+  background-color:lightseagreen
 }
 
 .img_4 {
-  background-image: url(https://images.pexels.com/photos/1864204/pexels-photo-1864204.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  /* background-image: url(https://images.pexels.com/photos/1864204/pexels-photo-1864204.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+  background-color:black
 }
 
 #slide_1 {
@@ -421,6 +428,47 @@ i {
 
 #hi{
   top:600px;
-  background-image: rgb(252, 118, 106);
+  background-image: #fc766a;
   position: relative;
+}
+
+.section{
+  width: 100%;
+  height: 100vh;
+  margin-top: 50px;
+  display: block;
+  justify-content: center;
+}
+
+.sections{
+  user-select: none;
+  display: block;
+  position: relative;
+  
+  margin:5%;
+  left: 30%;
+  width: 80%;
+  max-width: 600px;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 15px;
+  font-size: 14px;
+  color: black;
+}
+
+.word{
+  margin-left: 20px;
+}
+.BMI{
+  background-color:white;
+}
+
+.title{
+  text-align: center;
+}
+.records{
+  background-color:white;
 }
