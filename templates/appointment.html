@@ -7,16 +7,16 @@
    <form method="POST" action="">
       <div class="user-box">
          <label for="location"></label>
-         <input name="location" type="string" class="form-control" id="location" placeholder="Weight in kg" required="">
+         <input name="location" type="string" class="form-control" id="location" placeholder="location" required="">
       </div>
       <div class="user-box">
          <label for="datetime"></label>
-         <input name="datetime" type="datetime-local" class="form-control" id="time" placeholder="Weight in kg"
-            required="">
+         <input name="datetime" type="datetime-local" class="form-control" id="time" placeholder="" required="">
       </div>
       <div class="user-box">
          <label for="symptoms"></label>
-         <input name="symptoms" type="string" class="form-control" id="symptoms" placeholder="Weight in kg" required="">
+         <input name="symptoms" type="string" class="form-control" id="symptoms" placeholder="Any symptoms you feel"
+            required="">
       </div>
       <button type="submit" onclick="showOverlay()" class="btn btn-primary">Update</button>
    </form>
@@ -44,7 +44,7 @@
       <td class="text-left">{{ completed }}</th>
       <td class="text-left">{{ prescriptions }}</th>
    </tr>
+   {% endfor %}
 </table>
-{% endfor %}
 {% endif %}
 {% endblock %}

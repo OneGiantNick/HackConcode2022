@@ -104,9 +104,18 @@ def appointments():
     appointment_list = functions.getUserAppointments(username)
     if len(appointment_list) != 0:
         appointment_list_info = []
+        print(len(appointment_list))
         for i in range(len(appointment_list)):
-            info = (username, functions.getAppointmentDate(appointment_list[i]))
-            appointment_list_info.push(info)
+            print(appointment_list[i])
+            info = (
+                username,
+                functions.getLocation(appointment_list[i]),
+                functions.getAppointmentDate(appointment_list[i]),
+                functions.getSymptoms(appointment_list[i]),
+                functions.getCompleted(appointment_list[i]),
+                functions.getPrescriptions(appointment_list[i]),
+            )
+            appointment_list_info.append(info)
         return render_template("appointment.html", data=appointment_list_info)
     message = "No appointments... Make one now!"
     return render_template("appointment.html", message=message)

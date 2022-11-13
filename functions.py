@@ -142,9 +142,29 @@ def getUserFromSession(session_contract_address):
     return session.functions.username().call()
 
 
-def getAppointmentDate(session_contract_address):
-    session = w3.eth.contract(address=session, abi=session.abi)
+def getAppointmentDate(appointment_contract_address):
+    session = w3.eth.contract(address=appointment_contract_address, abi=appointment_abi)
     return session.functions.appointment_datetime().call()
+
+
+def getLocation(appointment_contract_address):
+    session = w3.eth.contract(address=appointment_contract_address, abi=appointment_abi)
+    return session.functions.location().call()
+
+
+def getSymptoms(appointment_contract_address):
+    session = w3.eth.contract(address=appointment_contract_address, abi=appointment_abi)
+    return session.functions.symptoms().call()
+
+
+def getCompleted(appointment_contract_address):
+    session = w3.eth.contract(address=appointment_contract_address, abi=appointment_abi)
+    return session.functions.completed().call()
+
+
+def getPrescriptions(appointment_contract_address):
+    session = w3.eth.contract(address=appointment_contract_address, abi=appointment_abi)
+    return session.functions.prescription().call()
 
 
 def getUserAppointments(username):

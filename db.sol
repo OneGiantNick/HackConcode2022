@@ -17,12 +17,12 @@ contract Session {
 }
 
 contract Appointment {
-    string username;
-    string location;
-    uint256 appointment_datetime;
-    string symptoms;
-    bool completed = false;
-    string prescription = "None";
+    string public username;
+    string public location;
+    uint256 public appointment_datetime;
+    string public symptoms;
+    bool public completed = false;
+    string public prescription = "None";
 
     constructor(
         string memory _username,
