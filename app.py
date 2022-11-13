@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request, url_for, make_response
 import functions
+from datetime import datetime
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.debug = True
@@ -90,10 +91,12 @@ def appointments():
         return redirect(url_for("login"))
     username = functions.getUserFromSession(session)
     if request.method == "POST":
+        dt = datetime.strptime(request.form.get("datetime"), "%Y-%m-%dT%H:%M")
+        dt = int(round(dt.timestamp()))
         functions.createAppointment(
             username,
             request.form.get("location"),
-            request.form.get("datetime"),
+            dt,
             request.form.get("symptoms"),
         )
         return redirect(url_for("appointments"))
@@ -102,7 +105,7 @@ def appointments():
     if len(appointment_list) != 0:
         appointment_list_info = []
         for i in range(len(appointment_list)):
-            info = (username, functions.getAppointmentDate(session))
+            info = (username, functions.getAppointmentDate(appointment_list[i]))
             appointment_list_info.push(info)
         return render_template("appointment.html", data=appointment_list_info)
     message = "No appointments... Make one now!"
