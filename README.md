@@ -31,7 +31,7 @@ You will be brought to the following screen.
 
 <img width="846" alt="image" src="https://user-images.githubusercontent.com/47775170/200106343-4bfe596a-63e8-47ad-8052-a80c7c89c7f3.png">
 
-Choose any of the wallets to use as the deployer wallet. Copy and paste the address and private key into *deploy.py*. You can find these by clicking on the key icon next to the wallet. **Below is a sample wallet. Do not use it. Use a wallet that is on your simulated ganache blockchain**
+Choose any of the wallets to use as the deployer wallet. Copy and paste the address and private key into *wallet_details.py*. You can find these by clicking on the key icon next to the wallet. **Below is a sample wallet. Do not use it. Use a wallet that is on your simulated ganache blockchain**
 
 <img width="501" alt="image" src="https://user-images.githubusercontent.com/47775170/200106405-5169730d-7233-434b-8c60-145d3c3214ba.png">
 
