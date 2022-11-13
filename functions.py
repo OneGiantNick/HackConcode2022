@@ -115,7 +115,7 @@ def updateNewcomer(username, sex, height, weight):
     try:
         nonce = w3.eth.getTransactionCount(my_address)
         transaction = db.functions.updateNewcomer(
-            username, sex, height, weight
+            username, sex, int(height), int(weight)
         ).buildTransaction(
             {
                 "chainId": chain_id,
@@ -124,6 +124,7 @@ def updateNewcomer(username, sex, height, weight):
                 "nonce": nonce,
             }
         )
+        print("hello")
         tx_receipt = handleTransaction(transaction)
         return "success"
     except:
