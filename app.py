@@ -99,8 +99,15 @@ def health():
         return redirect(url_for("login"))
     username = functions.getUserFromSession(session)
     data = functions.getUser(username)
-    print(data)
-    return render_template("health.html")
+    
+    _sex = data[2]
+    _height = data[3]
+    _weight = data[4]
+    _bmi = round(_weight/(_height/100)**2, 2)
+    return render_template("health.html", sex=_sex, 
+                                        height=_height,
+                                        weight=_weight,
+                                        bmi = _bmi)
 
 
 if __name__ == "__main__":
