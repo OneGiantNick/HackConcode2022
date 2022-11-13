@@ -2,116 +2,36 @@
 {% set active_page = "appointments" %}
 {% block content %}
 <!--Put code here-->
-<form method="POST">
-   <div class="entireForm">
-      <div class="section">
-         <label for="username">
-            Username:
-         </label>
-         <input type="text" id="username">
+<div class="login-box">
+   <h2>Create<span id="box">Appointment</span></h2>
+   <form method="POST" action="">
+      <div class="user-box">
+         <label for="username"></label>
+         <input name="username" type="string" class="form-control" id="username" placeholder="Height in cm" required="">
       </div>
-      <div class="section">
-         <label for="date">
-            Date Of Appointment:
-         </label>
-         <input type="datetime-local" id="date">
+      <div class="user-box">
+         <label for="location"></label>
+         <input name="location" type="string" class="form-control" id="location" placeholder="Weight in kg" required="">
       </div>
-      <div class="section">
-         <label for="medicalFacility">Hospital/Clinic:</label>
-         <select name="medicalFacility" id="medicalFacility">
-            <option value="Alexandra Hospital">Alexandra Hospital</option>
-            <option value="Ang Mo Kio-Thye Hua Kwan Hospital">Ang Mo Kio-Thye Hua Kwan Hospital</option>
-            <option value="Bright Vision Hospital">Bright Vision Hospital</option>
-            <option value="Changi General Hospital">Changi General Hospital</option>
-            <option value="Complex Medical Centre">Complex Medical Centre</option>
-            <option value="Crawfurd Hospital">Crawfurd Hospital</option>
-            <option value="Farrer Park Hospital">Farrer Park Hospital</option>
-            <option value="Gleneagles Hospital">Gleneagles Hospital</option>
-            <option value="Institude of Mental Health">Institude of Mental Health</option>
-            <option value="Jurong Community Hospital">Jurong Community Hospital</option>
-            <option value="Khoo Teck Puat Hospital">Khoo Teck Puat Hospital</option>
-            <option value="KK Women's and Children Hospital">KK Women's and Children Hospital</option>
-            <option value="Mount Alvernia Hospital">Mount Alvernia Hospital</option>
-            <option value="Mount Elizabeth Hospital">Mount Elizabeth Hospital</option>
-            <option value="Mount Elizabeth Novena Hospital">Mount Elizabeth Novena Hospital</option>
-            <option value="National Heart Center Singapore">National Heart Center Singapore</option>
-            <option value="National University Hospital">National University Hospital</option>
-            <option value="Ng Teng Fong General Hospital">Ng Teng Fong General Hospital</option>
-            <option value="Outram Community Hospital">Outram Community Hospital</option>
-            <option value="Parkway East Hospital">Parkway East Hospital</option>
-            <option value="Raffles Hospital">Raffles Hospital</option>
-            <option value="Ren Ci Community Hospital">Ren Ci Community Hospital</option>
-            <option value="Sengkang Community Hospital">Sengkang Community Hospital</option>
-            <option value="Sengkang General Hospital">Sengkang General Hospital</option>
-            <option value="Singapore General Hospital">Singapore General Hospital</option>
-            <option value="St Andrew's Community Hospital">St Andrew's Community Hospital</option>
-            <option value="St Luke's Hospital">St Luke's Hospital</option>
-            <option value="Tan Tock Seng Hospital">Tan Tock Seng Hospital</option>
-            <option value="Tan Tock Seng Hospital Rehabilitation Centre ">Tan Tock Seng Hospital Rehabilitation Centre
-            </option>
-            <option value="Tan Tock Seng Hospital Subcuate Wards">Tan Tock Seng Hospital Subcuate Wards</option>
-            <option value="Thomson Medical Centre">Thomson Medical Centre</option>
-            <option value="Yishun Community Hospital">Yishun Community Hospital</option>
-         </select>
+      <div class="user-box">
+         <label for="datetime"></label>
+         <input name="datetime" type="datetime-local" class="form-control" id="time" placeholder="Weight in kg"
+            required="">
       </div>
-      <div class="section">
-         <label class="what">What are you seeking an appointment for ?</label>
-         <div class="medicalConditions">
-            <label for="chestPains">Chest pains</label>
-            <input type="radio" name="illness" id="chestPains">
-         </div>
-         <div class="medicalConditions">
-            <label for="abdominalPains">Abdominal Pains</label>
-            <input type="radio" name="illness" id="abdominalPains">
-         </div>
-         <div class="medicalConditions">
-            <label for="toothaches">Toothaches</label>
-            <input type="radio" name="illness" id="toothaches">
-         </div>
-         <div class="medicalConditions">
-            <label for="brokenBonesAndSprains">Broken Bones And Sprains</label>
-            <input type="radio" name="illness" id="brokenBonesAndSprains">
-         </div>
-         <div class="medicalConditions">
-            <label for="upperRespiratoryInfections">Upper Respiratory Infections</label>
-            <input type="radio" name="illness" id="upperRespiratoryInfections">
-         </div>
-         <div class="medicalConditions">
-            <label for="contusionsAndCuts">Contusions And Cuts</label>
-            <input type="radio" name="illness" id="contusionsAndCuts">
-         </div>
-         <div class="medicalConditions">
-            <label for="backPain">Back Pain</label>
-            <input type="radio" name="illness" id="backPain">
-         </div>
-         <div class="medicalConditions">
-            <label for="skinInfections">Skin Infections</label>
-            <input type="radio" name="illness" id="skinInfections">
-         </div>
-         <div class="medicalConditions">
-            <label for="foreignObjectsIntheBody">Foreign Objects In the Body</label>
-            <input type="radio" name="illness" id="foreignObjectsIntheBody">
-         </div>
-         <div class="medicalConditions">
-            <label for="headaches">Headaches</label>
-            <input type="radio" name="illness" id="headaches">
-         </div>
-         <div>
-            <label for="others">
-               Others
-            </label>
-            <textarea id="others" name="SpecialIllness"></textarea>
-         </div>
+      <div class="user-box">
+         <label for="symptoms"></label>
+         <input name="symptoms" type="string" class="form-control" id="symptoms" placeholder="Weight in kg" required="">
       </div>
-      <div>
-         <input type="hidden" name="completion" value="false">
-      </div>
-      <div>
-         <input type="hidden" name="medicine" value="none">
-      </div>
-      <button class="appointmentbtn" type="reset">Reset</button>
-      <button class="appointmentbtn" type="submit">Submit</button>
-   </div>
-</form>
-<script><iframe src="https://www.google.com/maps/d/u/0/embed?mid=1iSmj7jgCprWwW2g5KzTloEvIWQLA6Sc&ehbc=2E312F" width="640" height="480"></iframe></script>
+      <button type="submit" onclick="showOverlay()" class="btn btn-primary">Update</button>
+   </form>
+</div>
+{% if message %}
+<h2>{{ message }}</h2>
+{% endif %}
+
+{% if data%}
+{% for %}
+
+{% end for %}
+{% endif %}
 {% endblock %}
