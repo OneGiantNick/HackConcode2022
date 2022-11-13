@@ -83,18 +83,28 @@ def dashboard():
     return render_template("dashboard.html", username=user)
 
 
-@app.route("/appointments")
+@app.route("/appointments", methods=["GET", "POST"])
 def appointments():
     session = cookiejar["session_address"]
     if session == None:
         return redirect(url_for("login"))
     username = functions.getUserFromSession(session)
+    if request.method == "POST":
+        functions.createAppointment(
+            username,
+            request.form.get("location"),
+            request.form.get("datetime"),
+            request.form.get("symptoms"),
+        )
+        return redirect(url_for("appointments"))
+
     appointment_list = functions.getUserAppointments(username)
     if len(appointment_list) != 0:
         appointment_list_info = []
         for i in range(len(appointment_list)):
             info = (username, functions.getAppointmentDate(session))
             appointment_list_info.push(info)
+        return render_template("appointment.html", data=appointment_list_info)
     message = "No appointments... Make one now!"
     return render_template("appointment.html", message=message)
 
@@ -106,15 +116,15 @@ def health():
         return redirect(url_for("login"))
     username = functions.getUserFromSession(session)
     data = functions.getUser(username)
-    
+
     _sex = data[2]
     _height = data[3]
     _weight = data[4]
-    _bmi = round(_weight/(_height/100)**2, 2)
-    return render_template("health.html", sex=_sex, 
-                                        height=_height,
-                                        weight=_weight,
-                                        bmi = _bmi)
+    _bmi = round(_weight / (_height / 100) ** 2, 2)
+    return render_template(
+        "health.html", sex=_sex, height=_height, weight=_weight, bmi=_bmi
+    )
+
 
 @app.route("/setup", methods=["GET", "POST"])
 def setup():
@@ -129,7 +139,6 @@ def setup():
         )
         return redirect(url_for("health"))
     return render_template("setup.html")
-
 
 
 if __name__ == "__main__":

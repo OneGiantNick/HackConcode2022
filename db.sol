@@ -18,13 +18,22 @@ contract Session {
 
 contract Appointment {
     string username;
+    string location;
     uint256 appointment_datetime;
+    string symptoms;
     bool completed = false;
     string prescription = "None";
 
-    constructor(string memory _username, uint256 _appointment_datetime) {
+    constructor(
+        string memory _username,
+        string memory _location,
+        uint256 _appointment_datetime,
+        string memory _symptoms
+    ) {
         username = _username;
+        location = _location;
         appointment_datetime = _appointment_datetime;
+        symptoms = _symptoms;
     }
 
     function changeAppointmentDate(uint256 new_appointment_datetime) public {
@@ -87,11 +96,15 @@ contract Users {
 
     function createAppointment(
         string memory _username,
-        uint256 _appointment_datetime
+        string memory _location,
+        uint256 _appointment_datetime,
+        string memory _symptoms
     ) public {
         Appointment appointment = new Appointment(
             _username,
-            _appointment_datetime
+            _location,
+            _appointment_datetime,
+            _symptoms
         );
         appointments[address(appointment)] = _username;
         appointments_lookup.push(address(appointment));

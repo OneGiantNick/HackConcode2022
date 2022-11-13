@@ -6,10 +6,6 @@
    <h2>Create<span id="box">Appointment</span></h2>
    <form method="POST" action="">
       <div class="user-box">
-         <label for="username"></label>
-         <input name="username" type="string" class="form-control" id="username" placeholder="Height in cm" required="">
-      </div>
-      <div class="user-box">
          <label for="location"></label>
          <input name="location" type="string" class="form-control" id="location" placeholder="Weight in kg" required="">
       </div>
@@ -29,9 +25,26 @@
 <h2>{{ message }}</h2>
 {% endif %}
 
-{% if data%}
-{% for %}
-
-{% end for %}
+{% if data %}
+<table>
+   <tr>
+      <th class="text-left">Username</th>
+      <th class="text-left">Location</th>
+      <th class="text-left">Appointment_datetime</th>
+      <th class="text-left">Symptoms</th>
+      <th class="text-left">Completed?</th>
+      <th class="text-left">Prescriptions</th>
+   </tr>
+   {% for username, location, appointment_datetime, symptoms, completed, prescriptions in data %}
+   <tr>
+      <td class="text-left">{{ username }}</th>
+      <td class="text-left">{{ location }}</th>
+      <td class="text-left">{{ appointment_datetime }}</th>
+      <td class="text-left">{{ symptoms }}</th>
+      <td class="text-left">{{ completed }}</th>
+      <td class="text-left">{{ prescriptions }}</th>
+   </tr>
+</table>
+{% endfor %}
 {% endif %}
 {% endblock %}
