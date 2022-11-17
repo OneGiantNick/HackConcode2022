@@ -1,4 +1,6 @@
 # HackConcode2022
+Video Demo - https://www.youtube.com/watch?v=sOtEYhrfQR0
+
 HealthUP - Our project for HackConcode2022
 
 
@@ -42,10 +44,10 @@ Choose any of the wallets to use as the deployer wallet. Copy and paste the addr
 
 ### Deploy.py
 
-Start the project by running *deploy.py* it is located at /deploy.
+Start the project by running *deploy.py*.
 
 ```bash
-/deploy.py
+py deploy.py
 ```
 
 ### Running the flask server
@@ -80,9 +82,5 @@ Shows users BMI, health records and particulars (records and particulars are pla
 
 ### db.sol
 
-The smart contract that django interacts with to store data on the blockchain. Written in solidity
-
-#### Session
-
-Smart contract to store individual sessions of users who log in. Stores username, login date and logout date
+The smart contract that flask interacts with to store data on the blockchain. Written in solidity
 
